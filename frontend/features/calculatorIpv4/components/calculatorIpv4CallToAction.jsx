@@ -4,6 +4,8 @@ const useToggle = require("../../../hooks/useToggle")
 const parseSubnetToCIDR = require("../../../libs/parseSubnetToCIDR")
 const calculateNetworkAddr = require("../../../libs/calculateNetworkAddr")
 const calculateBroadcastAddr = require("../../../libs/calculateBroadcastAddr")
+const Button = require("../../../components/button")
+const CalculatorIpv4Title = require("./calculatorIpv4Title")
 
 function CalculatorIpv4CallToAction({value, Addr, SubMask}) {
 
@@ -22,54 +24,27 @@ function CalculatorIpv4CallToAction({value, Addr, SubMask}) {
     }, [isWidgetOpen])
 
     return (
-        isWidgetOpen ? <div className=" w-full flex flex-col relative rounded-lg">
-            <button className=" absolute right-3 text-3xl text-black opacity-20" onClick={toggleisWidgetOpen}>x</button>
-            <div className=" p-8 flex flex-col gap-12">
-                <div className="flex items-end justify-between">
-                    <h2 className=" font-bold text-xl underline">{data.title}</h2>
-                    <div className=" flex gap-5">
-                        <h3>netId: <span className=" font-bold text-primaryDarken">{data.netId}</span></h3>
-                        <h3>hostId: <span className=" font-bold text-primaryDarken">{data.hostId}</span></h3>
+        isWidgetOpen ? <div className=" flex flex-col relative rounded-lg">
+            <Button.BtnFN fn={toggleisWidgetOpen}> Reset</Button.BtnFN>
+            <div className=" flex flex-col gap-10">
+                <div className=" flex flex-col gap-4">
+                    <div className="flex items-end gap-16">
+                        <CalculatorIpv4Title value={data.title} />
+                        <div className=" flex gap-5">
+                            <h3>netId: <span className=" font-bold">{data.netId}</span></h3>
+                            <h3>hostId: <span className=" font-bold">{data.hostId}</span></h3>
+                        </div>
                     </div>
+                    <h3 className=" w-full text-xl">{"adresses disponible : "} <span className=" absolute right-0 font-bold">{data.hosts}</span></h3>
+                    <h3 className=" w-full text-xl">{"hôtes disponible : "} <span className=" absolute right-0 font-bold">{data.hosts}</span></h3>
                 </div>
                 <div className=" flex flex-col gap-4">
-                    <div className="flex justify-between">
-                        <h4 className=" text-sm font-bold">Plage Ip:</h4>
-                        <div>
-                            <span className=" text-primary">{data.ipRange[0]}</span>
-                            <span>{" -> "}</span>
-                            <span className=" text-secondary">{data.ipRange[1]}</span>
-                        </div>
-                    </div>
-                    <hr className=" opacity-30" />
-
-                    {/*<div className="flex justify-between">
-                        <h4 className=" text-sm font-bold">Plage ip utile:</h4>
-                        <div>
-                            <span className=" text-primary">{data.ipRange[0]}</span>
-                            <span>{" -> "}</span>
-                            <span className=" text-secondary">{data.ipRange[1]}</span>
-                        </div>
-                    </div>
-                    <hr className=" opacity-30" />*/}
-
-                    <div className="flex justify-between">
-                        <h4 className=" text-sm font-bold">{"Nombre d'hôtes:"}</h4>
-                        <span className=" text-primary">{data.hosts}</span>
-                    </div>
-                    <hr className=" opacity-30" />
-
-                    <div className="flex justify-between">
-                        <h4 className=" text-sm font-bold">{"Nombre d'adresse:"}</h4>
-                        <span className=" text-primary">{data.addrs}</span>
-                    </div>
-                    <hr className=" opacity-30" />
+                    <CalculatorIpv4Title value="Plage Ip" />
+                    <h3 className=" w-full text-xl">{data.ipRange[0] + " -> " + data.ipRange[1]}</h3>
                 </div>
             </div>
         </div> : <div className=" flex items-center">
-            <button className=" bold text-2xl border-2 rounded-lg px-5 py-1 relative before:w-full before:h-full before:block before:absolute before:left-0 before:top-0 before:rounded-md before:shadow-lg before:opacity-25 hover:before:opacity-40" onClick={toggleisWidgetOpen}>
-                {value}
-            </button>
+            <Button.BtnFN fn={toggleisWidgetOpen}>{value}</Button.BtnFN>
         </div>
     )
 }
