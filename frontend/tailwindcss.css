@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant mq-35rem (@media (max-width: 60rem));
+
+@theme {
+  --color-*: initial;
+  --color-black: #111111;
+  --color-green: #41E847;
+  --color-red: #E84141;
+  --color-blue: #4165E8;
+}

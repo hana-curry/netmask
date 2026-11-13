@@ -12,7 +12,7 @@ export default function Headder() {
     return (
         <isMenuExpandedContext.Provider value={[isExpanded, toggleExpanded]}>
 
-            <header className="pt-9 flex justify-between left-0 right-0 mq-35rem:mx-10 mx-16 m-auto fixed z-10">
+            <header className="pt-9 flex justify-between left-0 right-0 mq-35rem:mx-10 px-16 m-auto fixed z-10">
                 <Logo />
                 <HamburgerMenu />
                 <Navigation />
